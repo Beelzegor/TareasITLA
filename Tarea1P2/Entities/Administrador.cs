@@ -10,5 +10,6 @@ namespace MAPADECLASES.Entities
     {
         
         public string Rol {get; set;}
+        public int Salario {get; set;}
     }
 }
