@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Productos.Domain.Core;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Productos.Server.Models
+namespace Productos.Infrastructure.Models
 {
-    public class Producto
+    public class Producto   :  BaseEntity
     {
-        public int Id { get; set; }
 
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres.")]
 

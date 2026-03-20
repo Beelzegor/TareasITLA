@@ -1,78 +1,78 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using Productos.Server.Models;
+using Productos.Domain.Interface;
 
-// Papadio esto es lo ultimo de lo ultimo, no cap
 namespace Productos.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductosController : ControllerBase
     {
-        private readonly ProductosContext _context;
+        private readonly IProductosRepository _repository;
 
-        public ProductosController(ProductosContext context)
+        public ProductosController(IProductosRepository repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         [HttpPost]
-        [Route("crear")] // Creacion del producto
-        public async Task<IActionResult> CrearProducto(Producto producto)
+        [Route("crear")]
+        public async Task<IActionResult> CrearProducto([FromBody] Producto producto)
         {
-            await _context.Productos.AddAsync(producto);
-            await _context.SaveChangesAsync();
+            if (producto is null)
+                return BadRequest("El producto no puede ser nulo.");
 
+            await _repository.AddProducto(producto);
             return Ok();
         }
 
-        [HttpGet] // Lista para poder ver los productos
+        [HttpGet]
         [Route("lista")]
         public async Task<ActionResult<IEnumerable<Producto>>> ListaProductos()
         {
-            var productos = await _context.Productos.ToListAsync();
+            var productos = await _repository.GetAll();
             return Ok(productos);
         }
 
         [HttpGet]
-        [Route("ver")] // Aqui para ver el producto
+        [Route("ver/{id}")]
         public async Task<ActionResult<Producto>> VerProducto(int id)
         {
-            Producto producto = await _context.Productos.FindAsync(id); // Si esto aparece subrayado no es nada, funciona igual, cosas de la programacion
-            if (producto == null)
-            {
-                return NotFound();
-            }
+            var producto = await _repository.GetProductobyID(id);
+
+            if (producto is null)
+                return NotFound($"Producto con ID {id} no encontrado.");
+
             return Ok(producto);
         }
 
-
         [HttpPut]
-        [Route("editar")] // Aca para editar el producto
-        public async Task<IActionResult> ActualizarProducto(int id, Producto producto)
+        [Route("editar/{id}")]
+        public async Task<IActionResult> ActualizarProducto(int id, [FromBody] Producto producto)
         {
-            var productoExistente = await _context.Productos.FindAsync(id);
+            if (producto is null)
+                return BadRequest("El producto no puede ser nulo.");
 
-            productoExistente!.Nombre = producto.Nombre;
-            productoExistente.Descripcion = producto.Descripcion;
-            productoExistente.Precio = producto.Precio;
+            var productoExistente = await _repository.GetProductobyID(id);
 
-            await _context.SaveChangesAsync();
+            if (productoExistente is null)
+                return NotFound($"Producto con ID {id} no encontrado.");
+
+            producto.Id = id;
+            await _repository.EditarProducto(producto);
             return Ok();
-
         }
 
-
         [HttpDelete]
-        [Route("eliminar")] // Esto para eliminar el producto
+        [Route("eliminar/{id}")]
         public async Task<IActionResult> EliminarProducto(int id)
         {
-            var productoBorrado = await _context.Productos.FindAsync(id);
+            var producto = await _repository.GetProductobyID(id);
 
-            _context.Productos.Remove(productoBorrado!);
+            if (producto is null)
+                return NotFound($"Producto con ID {id} no encontrado.");
 
-            await _context.SaveChangesAsync();
+            await _repository.RemoveProducto(producto);
             return Ok();
         }
     }

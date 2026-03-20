@@ -1,43 +1,41 @@
 using Microsoft.EntityFrameworkCore;
-using Productos.Server.Models;
+using Productos.Infrastructure.Context;
 
-namespace Productos.Server
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder();
 
-            // Servicios
-            builder.Services.AddControllers();
+
+    builder.Services.AddControllers();
             builder.Services.AddDbContext<ProductosContext>(o =>
             {
                 o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            // Swagger
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
 
-            var app = builder.Build();
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
 
-            // Middleware
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Productos API v1");
-                    c.RoutePrefix = string.Empty; // Para que abra en la raíz: https://localhost:7243/
-                });
-            }
+    var app = builder.Build();
 
-            app.UseHttpsRedirection();
-            app.UseAuthorization();
-            app.MapControllers();
 
-            app.Run();
-        }
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "Productos API v1");
+            c.RoutePrefix = string.Empty;
+        });
     }
-}
+
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
+
+    app.Run();
+
+
+        
+            
+        
+
+
