@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Reparaciones.Domain/Reparaciones.Domain.csproj" />
+  <Project Path="Reparaciones.Infrastructure/Reparaciones.Infrastructure.csproj" />
+  <Project Path="Reparaciones.Server/Reparaciones.Server.csproj" />
+</Solution>

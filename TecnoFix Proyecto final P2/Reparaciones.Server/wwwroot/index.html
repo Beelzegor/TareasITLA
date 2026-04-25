@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TecnoFix</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    body { background: #F1F5F9; margin: 0; }
+
+    /* Topbar */
+    .topbar {
+      background: #0F172A;
+      padding: 0 24px;
+      height: 58px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .brand-icon {
+      background: #F97316;
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .brand-name { color: #fff; font-weight: 700; font-size: 1.1rem; letter-spacing: -.3px; }
+    .brand-name span { color: #F97316; }
+    .topbar-right { color: #94A3B8; font-size: .82rem; }
+
+    /* Sidebar */
+    .sidebar {
+      background: #0F172A;
+      min-height: calc(100vh - 58px);
+      width: 220px;
+      padding: 20px 12px;
+      position: fixed;
+      top: 58px;
+      left: 0;
+    }
+    .sidebar-section {
+      color: #475569;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 0 10px;
+      margin: 18px 0 6px;
+    }
+    .nav-link-item {
+      color: #94A3B8;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: all .15s;
+    }
+    .nav-link-item i { font-size: 1rem; }
+    .nav-link-item:hover { background: #1E293B; color: #E2E8F0; }
+    .nav-link-item.active { background: #F97316; color: #fff; }
+    .nav-link-item.active i { color: #fff; }
+
+    /* Main content */
+    .main-content {
+      margin-left: 220px;
+      padding: 28px 32px;
+      min-height: calc(100vh - 58px);
+    }
+
+    /* Page header */
+    .page-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 4px;
+    }
+    .page-subtitle { color: #64748B; font-size: .875rem; margin-bottom: 24px; }
+
+    /* Stat cards */
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,.1); }
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+    .stat-icon.orange { background: #FFF7ED; color: #F97316; }
+    .stat-icon.blue   { background: #EFF6FF; color: #3B82F6; }
+    .stat-icon.green  { background: #F0FDF4; color: #22C55E; }
+    .stat-icon.purple { background: #FAF5FF; color: #A855F7; }
+    .stat-value { font-size: 1.75rem; font-weight: 700; color: #0F172A; line-height: 1; }
+    .stat-label { color: #64748B; font-size: .8rem; margin-top: 4px; }
+
+    /* Cards */
+    .content-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    .content-card-title { font-size: 1rem; font-weight: 600; color: #0F172A; margin-bottom: 16px; }
+
+    /* Table */
+    .table { margin-bottom: 0; }
+    .table thead th {
+      background: #F8FAFC;
+      color: #475569;
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 10px 14px;
+    }
+    .table td { padding: 12px 14px; vertical-align: middle; font-size: .875rem; color: #334155; border-color: #F1F5F9; }
+    .table tbody tr:hover { background: #F8FAFC; }
+
+    /* Buttons */
+    .btn-tecnofix {
+      background: #F97316;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: .875rem;
+      font-weight: 500;
+      transition: background .15s;
+    }
+    .btn-tecnofix:hover { background: #EA6C0A; color: #fff; }
+
+    /* Badges estado */
+    .badge-estado { font-size: .72rem; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+
+    /* Modal */
+    .modal-content { border-radius: 14px; border: none; }
+    .modal-header { border-bottom: 1px solid #F1F5F9; padding: 18px 24px; }
+    .modal-title { font-weight: 600; font-size: 1rem; color: #0F172A; }
+    .modal-body { padding: 20px 24px; }
+    .form-label { font-size: .8rem; font-weight: 600; color: #475569; margin-bottom: 4px; }
+    .form-control, .form-select { border-radius: 8px; border-color: #E2E8F0; font-size: .875rem; }
+    .form-control:focus, .form-select:focus { border-color: #F97316; box-shadow: 0 0 0 3px rgba(249,115,22,.15); }
+  </style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a class="topbar-brand" href="#">
+    <div class="brand-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+    <span class="brand-name">Tecno<span>Fix</span></span>
+  </a>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ul class="list-unstyled mb-0">
+    <li><a href="#" class="nav-link-item active" onclick="loadSection('dashboard', this)"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
+
+    <div class="sidebar-section">Gestión</div>
+    <li><a href="#" class="nav-link-item" onclick="loadSection('reparaciones', this)"><i class="bi bi-wrench-adjustable"></i>Reparaciones</a></li>
+    <li><a href="#" class="nav-link-item" onclick="loadSection('garantias', this)"><i class="bi bi-shield-check"></i>Garantías</a></li>
+
+    <div class="sidebar-section">Catálogos</div>
+    <li><a href="#" class="nav-link-item" onclick="loadSection('clientes', this)"><i class="bi bi-people"></i>Clientes</a></li>
+    <li><a href="#" class="nav-link-item" onclick="loadSection('tecnicos', this)"><i class="bi bi-person-badge"></i>Técnicos</a></li>
+    <li><a href="#" class="nav-link-item" onclick="loadSection('electrodomesticos', this)"><i class="bi bi-tv"></i>Electrodomésticos</a></li>
+    <li><a href="#" class="nav-link-item" onclick="loadSection('repuestos', this)"><i class="bi bi-box-seam"></i>Repuestos</a></li>
+  </ul>
+</div>
+
+<!-- Main -->
+<div class="main-content">
+  <div id="content-area"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+<script src="js/clientes.js"></script>
+<script src="js/tecnicos.js"></script>
+<script src="js/electrodomesticos.js"></script>
+<script src="js/repuestos.js"></script>
+<script src="js/reparaciones.js"></script>
+<script src="js/garantias.js"></script>
+<script>
+  function loadSection(section, el) {
+    document.querySelectorAll('.nav-link-item').forEach(e => e.classList.remove('active'));
+    el.classList.add('active');
+    const sections = { dashboard, clientes, tecnicos, electrodomesticos, repuestos, reparaciones, garantias };
+    sections[section]();
+  }
+  dashboard();
+</script>
+</body>
+</html>
