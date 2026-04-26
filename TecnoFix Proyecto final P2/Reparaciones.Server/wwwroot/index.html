@@ -11,7 +11,6 @@
     * { font-family: 'Inter', sans-serif; }
     body { background: #F1F5F9; margin: 0; }
 
-    /* Topbar */
     .topbar {
       background: #0F172A;
       padding: 0 24px;
@@ -44,7 +43,6 @@
     .brand-name span { color: #F97316; }
     .topbar-right { color: #94A3B8; font-size: .82rem; }
 
-    /* Sidebar */
     .sidebar {
       background: #0F172A;
       min-height: calc(100vh - 58px);
@@ -80,14 +78,12 @@
     .nav-link-item.active { background: #F97316; color: #fff; }
     .nav-link-item.active i { color: #fff; }
 
-    /* Main content */
     .main-content {
       margin-left: 220px;
       padding: 28px 32px;
       min-height: calc(100vh - 58px);
     }
 
-    /* Page header */
     .page-title {
       font-size: 1.4rem;
       font-weight: 700;
@@ -96,7 +92,6 @@
     }
     .page-subtitle { color: #64748B; font-size: .875rem; margin-bottom: 24px; }
 
-    /* Stat cards */
     .stat-card {
       background: #fff;
       border-radius: 12px;
@@ -122,7 +117,6 @@
     .stat-value { font-size: 1.75rem; font-weight: 700; color: #0F172A; line-height: 1; }
     .stat-label { color: #64748B; font-size: .8rem; margin-top: 4px; }
 
-    /* Cards */
     .content-card {
       background: #fff;
       border-radius: 12px;
@@ -131,7 +125,6 @@
     }
     .content-card-title { font-size: 1rem; font-weight: 600; color: #0F172A; margin-bottom: 16px; }
 
-    /* Table */
     .table { margin-bottom: 0; }
     .table thead th {
       background: #F8FAFC;
@@ -146,7 +139,6 @@
     .table td { padding: 12px 14px; vertical-align: middle; font-size: .875rem; color: #334155; border-color: #F1F5F9; }
     .table tbody tr:hover { background: #F8FAFC; }
 
-    /* Buttons */
     .btn-tecnofix {
       background: #F97316;
       color: #fff;
@@ -159,10 +151,8 @@
     }
     .btn-tecnofix:hover { background: #EA6C0A; color: #fff; }
 
-    /* Badges estado */
     .badge-estado { font-size: .72rem; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
 
-    /* Modal */
     .modal-content { border-radius: 14px; border: none; }
     .modal-header { border-bottom: 1px solid #F1F5F9; padding: 18px 24px; }
     .modal-title { font-weight: 600; font-size: 1rem; color: #0F172A; }
@@ -174,7 +164,6 @@
 </head>
 <body>
 
-<!-- Topbar -->
 <div class="topbar">
   <a class="topbar-brand" href="#">
     <div class="brand-icon"><i class="bi bi-lightning-charge-fill"></i></div>
@@ -182,7 +171,6 @@
   </a>
 </div>
 
-<!-- Sidebar -->
 <div class="sidebar">
   <ul class="list-unstyled mb-0">
     <li><a href="#" class="nav-link-item active" onclick="loadSection('dashboard', this)"><i class="bi bi-speedometer2"></i>Dashboard</a></li>
@@ -199,7 +187,6 @@
   </ul>
 </div>
 
-<!-- Main -->
 <div class="main-content">
   <div id="content-area"></div>
 </div>
