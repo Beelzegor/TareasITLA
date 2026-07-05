@@ -1,0 +1,30 @@
+:root {
+    --fw-azul: #0D6EFD;
+    --fw-verde: #198754;
+    --fw-rojo: #DC3545;
+    --fw-gris: #F8F9FA;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--fw-gris);
+}
+
+.navbar-brand {
+    letter-spacing: 0.5px;
+}
+
+.card {
+    border: none;
+    border-radius: 0.6rem;
+}
+
+.table thead th {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+footer {
+    background-color: #fff;
+}
